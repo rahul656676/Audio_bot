@@ -1,13 +1,10 @@
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Mail, Phone, MapPin, Linkedin, Github, Send } from "lucide-react";
+import { Mail, Phone, MapPin, Linkedin, Github, Send, ArrowUpRight } from "lucide-react";
 
 const Contact = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  
-  const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
 
   const contactInfo = [
     {
@@ -15,125 +12,134 @@ const Contact = () => {
       label: "Email",
       value: "jangirrahul0026@gmail.com",
       href: "mailto:jangirrahul0026@gmail.com",
+      action: "Send email",
     },
     {
       icon: Phone,
       label: "Phone",
       value: "+91 8118852776",
       href: "tel:+918118852776",
+      action: "Call",
     },
     {
       icon: MapPin,
       label: "Location",
       value: "Pilani, Rajasthan, India",
       href: "#",
+      action: "View",
     },
   ];
 
   return (
-    <section id="contact" className="py-32 relative overflow-hidden" ref={ref}>
-      {/* Background glow */}
-      <motion.div 
-        style={{ y }}
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px]" 
-      />
+    <section id="contact" className="py-20 md:py-28 relative overflow-hidden" ref={ref}>
+      {/* Background */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px]" />
       
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="max-w-4xl mx-auto"
+          transition={{ duration: 0.5 }}
+          className="max-w-3xl mx-auto text-center"
         >
-          {/* Section Title */}
-          <div className="text-center mb-12">
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5 }}
-              className="text-highlight font-mono mb-4"
+          {/* Header */}
+          <motion.span
+            initial={{ opacity: 0, y: 10 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.4 }}
+            className="inline-block text-highlight font-mono text-sm mb-4"
+          >
+            What's Next?
+          </motion.span>
+          
+          <motion.h2 
+            className="section-title mb-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            <span className="text-gradient">Let's Connect</span>
+          </motion.h2>
+          
+          <motion.p 
+            className="section-subtitle mx-auto mb-10"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            I'm actively looking for <span className="text-highlight font-medium">AI Developer</span> and 
+            <span className="text-highlight font-medium"> Machine Learning Engineer</span> opportunities. 
+            Feel free to reach out — I'd love to hear from you!
+          </motion.p>
+
+          {/* Primary CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="mb-12"
+          >
+            <motion.a
+              href="mailto:jangirrahul0026@gmail.com"
+              className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-primary text-primary-foreground font-semibold rounded-xl transition-all shadow-3d hover:shadow-glow"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
             >
-              {"What's Next?"}
-            </motion.p>
-            <motion.h2 
-              className="text-4xl md:text-5xl font-bold mb-6"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
-              <span className="text-gradient">Get In Touch</span>
-            </motion.h2>
-            <motion.p 
-              className="text-muted-foreground text-lg max-w-xl mx-auto"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              {"I'm currently looking for"} <span className="text-highlight">AI Developer</span> or <span className="text-highlight">Machine Learning Engineer</span> opportunities. 
-              Whether you have a question or just want to say hi, {"I'll"} try my best to get back to you!
-            </motion.p>
-          </div>
+              <Mail className="w-5 h-5" />
+              Say Hello
+              <Send className="w-4 h-4" />
+            </motion.a>
+          </motion.div>
 
           {/* Contact Cards */}
-          <div className="grid sm:grid-cols-3 gap-6 mb-12">
+          <div className="grid sm:grid-cols-3 gap-4 mb-10">
             {contactInfo.map((info, index) => (
               <motion.a
                 key={info.label}
                 href={info.href}
-                initial={{ opacity: 0, y: 30, rotateX: 15 }}
-                animate={isInView ? { opacity: 1, y: 0, rotateX: 0 } : {}}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ y: -8, scale: 1.02 }}
-                className="glass-3d p-6 rounded-2xl text-center transition-all duration-500 group hover:border-primary/50"
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
+                className="glass-3d p-5 rounded-xl text-center card-hover group"
               >
-                <motion.div 
-                  className="inline-flex p-4 rounded-full bg-gradient-to-br from-primary/20 to-accent/10 mb-4 group-hover:from-primary/30 group-hover:to-accent/20 transition-all shadow-inner-3d"
-                  whileHover={{ rotate: 10, scale: 1.1 }}
-                >
-                  <info.icon className="w-6 h-6 text-highlight" />
-                </motion.div>
-                <p className="text-sm text-muted-foreground mb-1">{info.label}</p>
-                <p className="font-medium text-card-foreground group-hover:text-highlight transition-colors">{info.value}</p>
+                <div className="inline-flex p-3 rounded-xl bg-primary/10 border border-primary/15 mb-3 group-hover:bg-primary/15 transition-colors">
+                  <info.icon className="w-5 h-5 text-highlight" />
+                </div>
+                <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">{info.label}</p>
+                <p className="font-medium text-foreground text-sm group-hover:text-highlight transition-colors">
+                  {info.value}
+                </p>
               </motion.a>
             ))}
           </div>
 
           {/* Social Links */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="flex items-center justify-center gap-6"
+            transition={{ duration: 0.5, delay: 0.7 }}
+            className="flex items-center justify-center gap-4"
           >
-            <motion.a
+            <a
               href="https://linkedin.com/in/rahul-jangir-929a65305"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-4 rounded-full glass-3d transition-all duration-500 group hover:glow-primary"
-              whileHover={{ scale: 1.15, rotate: 5, y: -5 }}
-              whileTap={{ scale: 0.9 }}
+              className="flex items-center gap-2 px-4 py-2.5 glass-3d rounded-xl hover:border-primary/30 transition-all group"
             >
-              <Linkedin className="w-6 h-6 text-muted-foreground group-hover:text-highlight transition-colors" />
-            </motion.a>
-            <motion.a
+              <Linkedin className="w-4 h-4 text-muted-foreground group-hover:text-highlight transition-colors" />
+              <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">LinkedIn</span>
+              <ArrowUpRight className="w-3 h-3 text-muted-foreground group-hover:text-highlight transition-colors" />
+            </a>
+            <a
               href="https://github.com/rahul-jangir"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-4 rounded-full glass-3d transition-all duration-500 group hover:glow-primary"
-              whileHover={{ scale: 1.15, rotate: -5, y: -5 }}
-              whileTap={{ scale: 0.9 }}
+              className="flex items-center gap-2 px-4 py-2.5 glass-3d rounded-xl hover:border-primary/30 transition-all group"
             >
-              <Github className="w-6 h-6 text-muted-foreground group-hover:text-highlight transition-colors" />
-            </motion.a>
-            <motion.a
-              href="mailto:jangirrahul0026@gmail.com"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-primary text-primary-foreground font-semibold rounded-full transition-all shadow-3d glow-primary"
-              whileHover={{ scale: 1.05, boxShadow: "0 0 60px hsl(142, 76%, 36%, 0.6)" }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Say Hello
-              <Send className="w-5 h-5" />
-            </motion.a>
+              <Github className="w-4 h-4 text-muted-foreground group-hover:text-highlight transition-colors" />
+              <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">GitHub</span>
+              <ArrowUpRight className="w-3 h-3 text-muted-foreground group-hover:text-highlight transition-colors" />
+            </a>
           </motion.div>
         </motion.div>
       </div>
