@@ -6,58 +6,68 @@
 
 @layer base {
   :root {
-    --background: 120 10% 3%;
-    --foreground: 120 10% 95%;
+    --background: 120 15% 2%;
+    --foreground: 120 5% 75%;
 
-    --card: 120 8% 6%;
-    --card-foreground: 120 10% 95%;
+    --card: 120 12% 4%;
+    --card-foreground: 120 5% 70%;
 
-    --popover: 120 8% 6%;
-    --popover-foreground: 120 10% 95%;
+    --popover: 120 12% 4%;
+    --popover-foreground: 120 5% 70%;
 
-    --primary: 142 70% 45%;
-    --primary-foreground: 120 10% 3%;
+    --primary: 142 76% 36%;
+    --primary-foreground: 120 15% 2%;
 
-    --secondary: 120 10% 10%;
-    --secondary-foreground: 120 10% 95%;
+    --secondary: 120 15% 6%;
+    --secondary-foreground: 120 5% 70%;
 
-    --muted: 120 8% 8%;
-    --muted-foreground: 120 10% 55%;
+    --muted: 120 12% 5%;
+    --muted-foreground: 120 8% 45%;
 
-    --accent: 142 60% 35%;
-    --accent-foreground: 120 10% 95%;
+    --accent: 150 70% 25%;
+    --accent-foreground: 120 5% 85%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 120 10% 95%;
+    --destructive-foreground: 120 5% 95%;
 
-    --border: 120 10% 12%;
-    --input: 120 10% 12%;
-    --ring: 142 70% 45%;
+    --border: 142 30% 10%;
+    --input: 142 30% 10%;
+    --ring: 142 76% 36%;
 
     --radius: 0.75rem;
 
-    /* Custom gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(142, 70%, 45%) 0%, hsl(160, 80%, 40%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(142, 60%, 35%) 0%, hsl(120, 50%, 30%) 100%);
-    --gradient-hero: linear-gradient(180deg, hsl(120, 10%, 2%) 0%, hsl(120, 10%, 5%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(120, 8%, 8%) 0%, hsl(120, 8%, 4%) 100%);
+    /* Highlight text color */
+    --highlight: 142 76% 36%;
+
+    /* Custom gradients - darker greens */
+    --gradient-primary: linear-gradient(135deg, hsl(142, 76%, 36%) 0%, hsl(150, 70%, 25%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(150, 70%, 25%) 0%, hsl(140, 60%, 20%) 100%);
+    --gradient-hero: linear-gradient(180deg, hsl(120, 15%, 1%) 0%, hsl(120, 15%, 3%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(120, 12%, 5%) 0%, hsl(120, 12%, 2%) 100%);
+    --gradient-3d: linear-gradient(145deg, hsl(142, 76%, 36%, 0.3) 0%, hsl(120, 15%, 2%) 50%, hsl(142, 76%, 36%, 0.1) 100%);
+    
+    /* 3D Shadows */
+    --shadow-3d: 0 20px 60px -10px hsl(142, 76%, 36%, 0.4), 0 10px 20px -5px hsl(0, 0%, 0%, 0.8);
+    --shadow-3d-hover: 0 30px 80px -10px hsl(142, 76%, 36%, 0.5), 0 15px 30px -5px hsl(0, 0%, 0%, 0.9);
+    --shadow-inner-3d: inset 0 2px 4px hsl(142, 76%, 36%, 0.2), inset 0 -2px 4px hsl(0, 0%, 0%, 0.5);
     
     /* Glows */
-    --glow-primary: 0 0 60px hsl(142, 70%, 45%, 0.4);
-    --glow-accent: 0 0 60px hsl(142, 60%, 35%, 0.3);
+    --glow-primary: 0 0 80px hsl(142, 76%, 36%, 0.5);
+    --glow-accent: 0 0 60px hsl(150, 70%, 25%, 0.4);
+    --glow-intense: 0 0 100px hsl(142, 76%, 36%, 0.6), 0 0 200px hsl(142, 76%, 36%, 0.3);
     
     /* Typography */
     --font-display: 'Space Grotesk', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
 
-    --sidebar-background: 120 10% 3%;
-    --sidebar-foreground: 120 10% 95%;
-    --sidebar-primary: 142 70% 45%;
-    --sidebar-primary-foreground: 120 10% 3%;
-    --sidebar-accent: 120 8% 8%;
-    --sidebar-accent-foreground: 120 10% 95%;
-    --sidebar-border: 120 10% 12%;
-    --sidebar-ring: 142 70% 45%;
+    --sidebar-background: 120 15% 2%;
+    --sidebar-foreground: 120 5% 75%;
+    --sidebar-primary: 142 76% 36%;
+    --sidebar-primary-foreground: 120 15% 2%;
+    --sidebar-accent: 120 12% 5%;
+    --sidebar-accent-foreground: 120 5% 75%;
+    --sidebar-border: 142 30% 10%;
+    --sidebar-ring: 142 76% 36%;
   }
 }
 
@@ -95,6 +105,10 @@
     background-image: var(--gradient-accent);
   }
 
+  .text-highlight {
+    color: hsl(var(--highlight));
+  }
+
   .bg-gradient-primary {
     background-image: var(--gradient-primary);
   }
@@ -111,6 +125,10 @@
     background-image: var(--gradient-card);
   }
 
+  .bg-gradient-3d {
+    background-image: var(--gradient-3d);
+  }
+
   .glow-primary {
     box-shadow: var(--glow-primary);
   }
@@ -119,13 +137,65 @@
     box-shadow: var(--glow-accent);
   }
 
+  .glow-intense {
+    box-shadow: var(--glow-intense);
+  }
+
+  .shadow-3d {
+    box-shadow: var(--shadow-3d);
+  }
+
+  .shadow-3d-hover {
+    box-shadow: var(--shadow-3d-hover);
+  }
+
+  .shadow-inner-3d {
+    box-shadow: var(--shadow-inner-3d);
+  }
+
   .glass {
     @apply bg-card/80 backdrop-blur-xl border border-border/50;
+    box-shadow: var(--shadow-3d);
+  }
+
+  .glass-3d {
+    @apply bg-card/60 backdrop-blur-2xl border border-primary/20;
+    box-shadow: var(--shadow-3d), var(--shadow-inner-3d);
   }
 
   .noise {
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-    opacity: 0.03;
+    opacity: 0.02;
+  }
+
+  /* 3D Circle for profile */
+  .circle-3d {
+    position: relative;
+    border-radius: 50%;
+    background: linear-gradient(145deg, hsl(142, 76%, 36%, 0.4) 0%, hsl(120, 15%, 2%) 50%, hsl(142, 76%, 36%, 0.2) 100%);
+    box-shadow: 
+      0 0 0 4px hsl(142, 76%, 36%, 0.3),
+      0 0 0 8px hsl(142, 76%, 36%, 0.15),
+      0 0 0 12px hsl(142, 76%, 36%, 0.08),
+      0 20px 60px -10px hsl(142, 76%, 36%, 0.5),
+      inset 0 -20px 40px hsl(0, 0%, 0%, 0.5),
+      inset 0 20px 40px hsl(142, 76%, 36%, 0.2);
+  }
+
+  .circle-3d::before {
+    content: '';
+    position: absolute;
+    inset: -20px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, transparent 0%, hsl(142, 76%, 36%, 0.5) 25%, transparent 50%, hsl(142, 76%, 36%, 0.3) 75%, transparent 100%);
+    animation: rotate-glow 6s linear infinite;
+    z-index: -1;
+    filter: blur(8px);
+  }
+
+  @keyframes rotate-glow {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
   }
 }
 
