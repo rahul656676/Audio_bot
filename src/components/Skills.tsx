@@ -1,102 +1,74 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Code, Brain, Cloud, Database, Wrench, Library } from "lucide-react";
+import { Code, Brain, Cloud, Database } from "lucide-react";
 
 const skillCategories = [
   {
-    title: "Languages",
+    title: "Languages & Frameworks",
     icon: Code,
-    skills: ["Python", "SQL", "JavaScript"],
+    skills: ["Python", "JavaScript", "TypeScript", "React", "FastAPI", "Flask"],
   },
   {
-    title: "AI / Machine Learning",
+    title: "AI & Machine Learning",
     icon: Brain,
-    skills: ["Supervised Learning", "Feature Engineering", "Model Evaluation", "Neural Networks"],
+    skills: ["TensorFlow", "PyTorch", "Scikit-learn", "NLP", "LangChain", "OpenAI"],
   },
   {
-    title: "NLP & Conversational AI",
-    icon: Brain,
-    skills: ["Conversational AI", "Speech-to-Text", "Text Processing", "Dialogue Systems"],
-  },
-  {
-    title: "Cloud & Infrastructure",
+    title: "Cloud & DevOps",
     icon: Cloud,
-    skills: ["AWS EC2", "S3 Storage", "RDS/Aurora", "Linux Servers"],
+    skills: ["AWS EC2", "S3", "Lambda", "Docker", "CI/CD", "Linux"],
   },
   {
-    title: "Databases",
+    title: "Data & Databases",
     icon: Database,
-    skills: ["MySQL", "AWS RDS", "Aurora DB", "PostgreSQL"],
-  },
-  {
-    title: "Tools & DevOps",
-    icon: Wrench,
-    skills: ["Git", "GitHub", "Linux", "SSH", "VS Code", "Jupyter"],
-  },
-  {
-    title: "Libraries & Frameworks",
-    icon: Library,
-    skills: ["Pandas", "NumPy", "Scikit-learn", "Matplotlib", "TensorFlow"],
+    skills: ["PostgreSQL", "Aurora", "MongoDB", "Redis", "Pandas", "NumPy"],
   },
 ];
 
 const Skills = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="skills" className="py-20 md:py-28 relative overflow-hidden" ref={ref}>
-      {/* Background */}
-      <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[150px]" />
+    <section id="skills" className="py-20 md:py-28 relative" ref={ref}>
+      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-accent/5 rounded-full blur-[150px]" />
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="max-w-5xl mx-auto mb-12"
+          className="text-center mb-12"
         >
-          <div className="flex items-center gap-4 mb-4">
-            <h2 className="section-title">
-              <span className="text-gradient">Technical Skills</span>
-            </h2>
-            <div className="flex-1 h-px bg-gradient-to-r from-primary/40 to-transparent" />
-          </div>
-          <p className="section-subtitle">
-            Technologies and tools I use to bring AI solutions to life.
+          <h2 className="section-title mb-4">
+            <span className="text-gradient">Skills & Tools</span>
+          </h2>
+          <p className="section-subtitle mx-auto">
+            Technologies I use to build intelligent, scalable applications.
           </p>
         </motion.div>
 
-        {/* Skills Grid */}
-        <div className="max-w-5xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          {skillCategories.map((category, categoryIndex) => (
+        <div className="max-w-5xl mx-auto grid sm:grid-cols-2 gap-5">
+          {skillCategories.map((category, index) => (
             <motion.div
               key={category.title}
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: categoryIndex * 0.08 }}
-              className="glass-3d p-5 rounded-xl card-hover"
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="glass-card border-glow rounded-2xl p-6"
             >
               <div className="flex items-center gap-3 mb-4">
-                <div className="p-2 rounded-lg bg-primary/10 border border-primary/15">
-                  <category.icon className="w-4 h-4 text-highlight" />
+                <div className="p-2.5 rounded-lg bg-gradient-primary">
+                  <category.icon className="w-5 h-5 text-primary-foreground" />
                 </div>
-                <h3 className="text-sm font-semibold text-foreground">
-                  {category.title}
-                </h3>
+                <h3 className="font-semibold text-foreground">{category.title}</h3>
               </div>
-              <div className="flex flex-wrap gap-1.5">
-                {category.skills.map((skill, skillIndex) => (
-                  <motion.span
-                    key={skill}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                    transition={{ duration: 0.3, delay: categoryIndex * 0.05 + skillIndex * 0.03 }}
-                    className="px-2.5 py-1 rounded-md text-xs font-medium bg-muted/40 text-muted-foreground border border-border/30 hover:border-primary/25 hover:text-highlight transition-all cursor-default"
-                  >
+              
+              <div className="flex flex-wrap gap-2">
+                {category.skills.map((skill) => (
+                  <span key={skill} className="tech-chip">
                     {skill}
-                  </motion.span>
+                  </span>
                 ))}
               </div>
             </motion.div>
